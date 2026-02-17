@@ -1,0 +1,44 @@
+[project]
+name = "gitlab-cli"
+version = "0.1.0"
+description = "Agent-friendly CLI for the GitLab API"
+requires-python = ">=3.11"
+dependencies = [
+    "cyclopts>=3.0",
+    "rich>=13.0",
+    "gitlab-client",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.0", "pytest-mock>=3.15", "ruff>=0.15"]
+
+[project.scripts]
+gitlab = "gitlab_cli.app:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/gitlab_cli"]
+
+[tool.uv.sources]
+gitlab-client = { path = "../../libs/gitlab" }
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["gitlab_cli"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
