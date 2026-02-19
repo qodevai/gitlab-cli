@@ -51,8 +51,10 @@ def format_note_list(items: list[Any], *, total: int = 0, page: int = 1) -> str:
     rows = []
     for n in items:
         body = n.get("body", "")
-        rows.append({
-            **n,
-            "_body": (body[:80] + "...") if len(body) > 80 else body,
-        })
+        rows.append(
+            {
+                **n,
+                "_body": (body[:80] + "...") if len(body) > 80 else body,
+            }
+        )
     return list_table(rows, NOTE_LIST_COLUMNS, title="Notes", total=total, page=page)

@@ -62,14 +62,21 @@ def format_discussion_list(items: list[Any], *, total: int = 0, page: int = 1) -
     for d in items:
         notes = d.get("notes", [])
         first_note = notes[0] if notes else {}
-        rows.append({
-            "id": d.get("id", ""),
-            "_author": first_note.get("author", {}).get("name", ""),
-            "_resolved": "Yes" if d.get("individual_note") is False and all(
-                n.get("resolved", False) for n in notes if n.get("resolvable")
-            ) else "No" if any(n.get("resolvable") for n in notes) else "-",
-            "_body": (first_note.get("body", "")[:80] + "...") if len(first_note.get("body", "")) > 80 else first_note.get("body", ""),
-        })
+        rows.append(
+            {
+                "id": d.get("id", ""),
+                "_author": first_note.get("author", {}).get("name", ""),
+                "_resolved": "Yes"
+                if d.get("individual_note") is False
+                and all(n.get("resolved", False) for n in notes if n.get("resolvable"))
+                else "No"
+                if any(n.get("resolvable") for n in notes)
+                else "-",
+                "_body": (first_note.get("body", "")[:80] + "...")
+                if len(first_note.get("body", "")) > 80
+                else first_note.get("body", ""),
+            }
+        )
     return list_table(rows, DISCUSSION_LIST_COLUMNS, title="Discussions", total=total, page=page)
 
 

@@ -6,7 +6,6 @@ import sys
 from typing import Annotated
 
 from cyclopts import App, Group, Parameter
-
 from gitlab_client import APIError, AuthenticationError, ConfigurationError, NotFoundError
 
 import gitlab_cli.context as _ctx
@@ -22,11 +21,11 @@ app.meta.group_parameters = Group("Global Options", sort_key=0)
 # ---------------------------------------------------------------------------
 # Import and register command groups
 # ---------------------------------------------------------------------------
-from gitlab_cli.commands.projects import projects_app  # noqa: E402
+from gitlab_cli.commands.issues import issues_app  # noqa: E402
+from gitlab_cli.commands.jobs import jobs_app  # noqa: E402
 from gitlab_cli.commands.mrs import mrs_app  # noqa: E402
 from gitlab_cli.commands.pipelines import pipelines_app  # noqa: E402
-from gitlab_cli.commands.jobs import jobs_app  # noqa: E402
-from gitlab_cli.commands.issues import issues_app  # noqa: E402
+from gitlab_cli.commands.projects import projects_app  # noqa: E402
 from gitlab_cli.commands.releases import releases_app  # noqa: E402
 from gitlab_cli.commands.variables import variables_app  # noqa: E402
 
@@ -55,7 +54,9 @@ EXIT_CONFIG = 84
 def launcher(
     *tokens: Annotated[str, Parameter(show=False, allow_leading_hyphen=True)],
     json: Annotated[bool, Parameter(name="--json", help="Output as JSON", negative="")] = False,
-    token: Annotated[str | None, Parameter(name="--token", help="GitLab token (overrides GITLAB_TOKEN)", show=False)] = None,
+    token: Annotated[
+        str | None, Parameter(name="--token", help="GitLab token (overrides GITLAB_TOKEN)", show=False)
+    ] = None,
     url: Annotated[str | None, Parameter(name="--url", help="GitLab URL (overrides GITLAB_URL)", show=False)] = None,
     project: Annotated[str | None, Parameter(name=["--project", "-p"], help="Project ID or path")] = None,
     limit: Annotated[int, Parameter(name="--limit", help="Results per page")] = 25,

@@ -27,9 +27,7 @@ class TestParseProjectPath:
         assert _parse_project_path("https://gitlab.com/org/group/project.git") == "org/group/project"
 
     def test_domain_filter_match(self) -> None:
-        assert (
-            _parse_project_path("git@gitlab.example.com:g/p.git", "https://gitlab.example.com") == "g/p"
-        )
+        assert _parse_project_path("git@gitlab.example.com:g/p.git", "https://gitlab.example.com") == "g/p"
 
     def test_domain_filter_no_match(self) -> None:
         assert _parse_project_path("git@github.com:g/p.git", "https://gitlab.example.com") is None
