@@ -15,7 +15,7 @@ def detail_table(data: Any, fields: list[tuple[str, str]], *, title: str | None 
         fields: List of (label, key) — key supports dot notation.
         title: Optional heading.
     """
-    d = data if isinstance(data, dict) else data
+    d = data
 
     lines: list[str] = []
     if title:
@@ -50,7 +50,7 @@ def list_table(
 
     rows: list[dict[str, str]] = []
     for item in items:
-        d = item if isinstance(item, dict) else item
+        d = item
         row = {}
         for _, key in columns:
             row[key] = _fmt(_get(d, key))

@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 
-import json
 from datetime import datetime
 
-from gitlab_cli.context import Context
 from gitlab_cli.output import generic_markdown, md_table, serialize
 
 

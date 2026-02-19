@@ -49,7 +49,9 @@ def format_wait_result(data: Any) -> str:
     summary = data.get("job_summary")
     if summary:
         lines.append("")
-        lines.append(f"**Jobs:** {summary.get('total', 0)} total, {summary.get('success', 0)} success, {summary.get('failed', 0)} failed")
+        lines.append(
+            f"**Jobs:** {summary.get('total', 0)} total, {summary.get('success', 0)} success, {summary.get('failed', 0)} failed"
+        )
 
     failed_jobs = data.get("failed_jobs", [])
     if failed_jobs:
