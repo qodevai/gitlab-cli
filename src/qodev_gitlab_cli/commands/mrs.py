@@ -64,6 +64,7 @@ def create(
             from qodev_gitlab_cli.output import error
 
             error("Could not detect current branch. Use --source.", ctx=ctx)
+            return  # unreachable, but helps mypy
 
     result = client.create_merge_request(
         project,
