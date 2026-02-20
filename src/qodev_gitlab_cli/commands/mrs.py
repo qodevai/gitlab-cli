@@ -67,7 +67,7 @@ def create(
 
     result = client.create_merge_request(
         project,
-        source_branch=source,  # type: ignore[arg-type]
+        source_branch=source,
         target_branch=target,
         title=title,
         description=description,
