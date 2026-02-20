@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 import pytest
 
-from gitlab_cli.context import Context
+from qodev_gitlab_cli.context import Context
 
 
 class TestContext:
@@ -36,13 +36,13 @@ class TestContext:
 
     def test_resolve_project_auto_detect(self) -> None:
         ctx = Context()
-        with patch("gitlab_cli.project.detect_project_from_git", return_value="detected/project"):
+        with patch("qodev_gitlab_cli.project.detect_project_from_git", return_value="detected/project"):
             assert ctx.resolve_project() == "detected/project"
 
     def test_resolve_project_no_git_raises(self) -> None:
         ctx = Context()
-        with patch("gitlab_cli.project.detect_project_from_git", return_value=None):
-            from gitlab_client.exceptions import ConfigurationError
+        with patch("qodev_gitlab_cli.project.detect_project_from_git", return_value=None):
+            from qodev_gitlab_api.exceptions import ConfigurationError
 
             with pytest.raises(ConfigurationError, match="Could not detect project"):
                 ctx.resolve_project()
@@ -50,19 +50,19 @@ class TestContext:
     def test_client_passes_token(self) -> None:
         ctx = Context()
         ctx.token = "my-token"
-        with patch("gitlab_cli.context.GitLabClient") as mock_cls:
+        with patch("qodev_gitlab_cli.context.GitLabClient") as mock_cls:
             ctx.client()
             mock_cls.assert_called_once_with(token="my-token")
 
     def test_client_passes_base_url(self) -> None:
         ctx = Context()
         ctx.base_url = "https://gl.com"
-        with patch("gitlab_cli.context.GitLabClient") as mock_cls:
+        with patch("qodev_gitlab_cli.context.GitLabClient") as mock_cls:
             ctx.client()
             mock_cls.assert_called_once_with(base_url="https://gl.com")
 
     def test_client_no_args(self) -> None:
         ctx = Context()
-        with patch("gitlab_cli.context.GitLabClient") as mock_cls:
+        with patch("qodev_gitlab_cli.context.GitLabClient") as mock_cls:
             ctx.client()
             mock_cls.assert_called_once_with()

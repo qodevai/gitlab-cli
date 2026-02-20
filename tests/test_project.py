@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from unittest.mock import patch
 
-from gitlab_cli.project import _parse_project_path, detect_project_from_git
+from qodev_gitlab_cli.project import _parse_project_path, detect_project_from_git
 
 
 class TestParseProjectPath:
@@ -38,19 +38,19 @@ class TestParseProjectPath:
 
 class TestDetectProjectFromGit:
     def test_no_git_root(self) -> None:
-        with patch("gitlab_cli.project._find_git_root", return_value=None):
+        with patch("qodev_gitlab_cli.project._find_git_root", return_value=None):
             assert detect_project_from_git() is None
 
     def test_no_remote(self) -> None:
         with (
-            patch("gitlab_cli.project._find_git_root", return_value="/tmp/repo"),
-            patch("gitlab_cli.project._get_remote_url", return_value=None),
+            patch("qodev_gitlab_cli.project._find_git_root", return_value="/tmp/repo"),
+            patch("qodev_gitlab_cli.project._get_remote_url", return_value=None),
         ):
             assert detect_project_from_git() is None
 
     def test_full_detection(self) -> None:
         with (
-            patch("gitlab_cli.project._find_git_root", return_value="/tmp/repo"),
-            patch("gitlab_cli.project._get_remote_url", return_value="git@gitlab.com:ns/proj.git"),
+            patch("qodev_gitlab_cli.project._find_git_root", return_value="/tmp/repo"),
+            patch("qodev_gitlab_cli.project._get_remote_url", return_value="git@gitlab.com:ns/proj.git"),
         ):
             assert detect_project_from_git() == "ns/proj"

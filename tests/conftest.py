@@ -1,4 +1,4 @@
-"""Shared fixtures for gitlab-cli tests."""
+"""Shared fixtures for qodev-gitlab-cli tests."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from gitlab_cli.context import Context
+from qodev_gitlab_cli.context import Context
 
 
 @pytest.fixture

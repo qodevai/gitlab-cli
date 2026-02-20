@@ -6,10 +6,10 @@ from typing import Annotated
 
 from cyclopts import App, Parameter
 
-from gitlab_cli.context import ctx
-from gitlab_cli.formatters.jobs import format_job_list
-from gitlab_cli.formatters.pipelines import format_pipeline_detail, format_pipeline_list, format_wait_result
-from gitlab_cli.output import output, output_list
+from qodev_gitlab_cli.context import ctx
+from qodev_gitlab_cli.formatters.jobs import format_job_list
+from qodev_gitlab_cli.formatters.pipelines import format_pipeline_detail, format_pipeline_list, format_wait_result
+from qodev_gitlab_cli.output import output, output_list
 
 pipelines_app = App(name="pipelines", help="Manage pipelines.")
 

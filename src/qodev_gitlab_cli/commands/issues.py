@@ -6,9 +6,9 @@ from typing import Annotated
 
 from cyclopts import App, Parameter
 
-from gitlab_cli.context import ctx
-from gitlab_cli.formatters.issues import format_issue_detail, format_issue_list, format_note_list
-from gitlab_cli.output import output, output_list
+from qodev_gitlab_cli.context import ctx
+from qodev_gitlab_cli.formatters.issues import format_issue_detail, format_issue_list, format_note_list
+from qodev_gitlab_cli.output import output, output_list
 
 issues_app = App(name="issues", help="Manage issues.")
 

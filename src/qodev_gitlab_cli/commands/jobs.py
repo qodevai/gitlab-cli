@@ -6,9 +6,9 @@ from typing import Annotated
 
 from cyclopts import App, Parameter
 
-from gitlab_cli.context import ctx
-from gitlab_cli.formatters.jobs import format_job_detail
-from gitlab_cli.output import output, output_markdown
+from qodev_gitlab_cli.context import ctx
+from qodev_gitlab_cli.formatters.jobs import format_job_detail
+from qodev_gitlab_cli.output import output, output_markdown
 
 jobs_app = App(name="jobs", help="Manage jobs.")
 
@@ -34,7 +34,7 @@ def log(
     log_text = client.get_job_log(project, id)
 
     if ctx.json_mode:
-        from gitlab_cli.output import output_json
+        from qodev_gitlab_cli.output import output_json
 
         output_json({"job_id": id, "log": log_text})
     else:

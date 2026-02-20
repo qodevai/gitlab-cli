@@ -6,9 +6,9 @@ from typing import Annotated
 
 from cyclopts import App, Parameter
 
-from gitlab_cli.context import ctx
-from gitlab_cli.formatters.variables import format_variable_detail, format_variable_list
-from gitlab_cli.output import output, output_list
+from qodev_gitlab_cli.context import ctx
+from qodev_gitlab_cli.formatters.variables import format_variable_detail, format_variable_list
+from qodev_gitlab_cli.output import output, output_list
 
 variables_app = App(name="variables", help="Manage CI/CD variables.")
 
@@ -31,7 +31,7 @@ def get(
     project = ctx.resolve_project()
     result = client.get_project_variable(project, key)
     if result is None:
-        from gitlab_cli.output import error
+        from qodev_gitlab_cli.output import error
 
         error(f"Variable '{key}' not found.", ctx=ctx, code="not_found", exit_code=81)
     else:
@@ -52,10 +52,10 @@ def set(
     var, action = client.set_project_variable(project, key, value, protected=protected, masked=masked)
 
     if ctx.json_mode:
-        from gitlab_cli.output import output_json
+        from qodev_gitlab_cli.output import output_json
 
         output_json({"variable": var, "action": action})
     else:
-        from gitlab_cli.output import output_markdown
+        from qodev_gitlab_cli.output import output_markdown
 
         output_markdown(f"Variable `{key}` **{action}** successfully.")

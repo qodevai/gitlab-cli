@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from unittest.mock import MagicMock, patch
 
-import gitlab_cli.context as _ctx
+import qodev_gitlab_cli.context as _ctx
 
 
 class TestProjectsCommand:
@@ -16,7 +16,7 @@ class TestProjectsCommand:
         _ctx.ctx.configure(json_mode=True, token=None, base_url=None, project="group/test-project", limit=25, page=1)
 
         with patch.object(_ctx.ctx, "client", return_value=mock_client):
-            from gitlab_cli.commands.projects import get
+            from qodev_gitlab_cli.commands.projects import get
 
             get(id="group/test-project")
 
@@ -35,7 +35,7 @@ class TestProjectsCommand:
         _ctx.ctx.configure(json_mode=True, token=None, base_url=None, project=None, limit=25, page=1)
 
         with patch.object(_ctx.ctx, "client", return_value=mock_client):
-            from gitlab_cli.commands.projects import list
+            from qodev_gitlab_cli.commands.projects import list
 
             list(owned=False)
 
@@ -53,7 +53,7 @@ class TestMrsCommand:
         _ctx.ctx.configure(json_mode=True, token=None, base_url=None, project="group/project", limit=25, page=1)
 
         with patch.object(_ctx.ctx, "client", return_value=mock_client):
-            from gitlab_cli.commands.mrs import list
+            from qodev_gitlab_cli.commands.mrs import list
 
             list(state="opened")
 
@@ -69,7 +69,7 @@ class TestMrsCommand:
         _ctx.ctx.configure(json_mode=True, token=None, base_url=None, project="group/project", limit=25, page=1)
 
         with patch.object(_ctx.ctx, "client", return_value=mock_client):
-            from gitlab_cli.commands.mrs import get
+            from qodev_gitlab_cli.commands.mrs import get
 
             get(iid=1)
 
@@ -86,7 +86,7 @@ class TestMrsCommand:
         _ctx.ctx.configure(json_mode=True, token=None, base_url=None, project="group/project", limit=25, page=1)
 
         with patch.object(_ctx.ctx, "client", return_value=mock_client):
-            from gitlab_cli.commands.mrs import close
+            from qodev_gitlab_cli.commands.mrs import close
 
             close(iid=1)
 
@@ -101,7 +101,7 @@ class TestMrsCommand:
         _ctx.ctx.configure(json_mode=True, token=None, base_url=None, project="group/project", limit=25, page=1)
 
         with patch.object(_ctx.ctx, "client", return_value=mock_client):
-            from gitlab_cli.commands.mrs import comment
+            from qodev_gitlab_cli.commands.mrs import comment
 
             comment(iid=1, body="LGTM")
 

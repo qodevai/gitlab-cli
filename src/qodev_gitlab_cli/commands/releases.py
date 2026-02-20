@@ -6,9 +6,9 @@ from typing import Annotated
 
 from cyclopts import App, Parameter
 
-from gitlab_cli.context import ctx
-from gitlab_cli.formatters.releases import format_release_detail, format_release_list
-from gitlab_cli.output import output, output_list
+from qodev_gitlab_cli.context import ctx
+from qodev_gitlab_cli.formatters.releases import format_release_detail, format_release_list
+from qodev_gitlab_cli.output import output, output_list
 
 releases_app = App(name="releases", help="Manage releases.")
 

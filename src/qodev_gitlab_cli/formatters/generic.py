@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from gitlab_cli.output import md_table
+from qodev_gitlab_cli.output import md_table
 
 
 def detail_table(data: Any, fields: list[tuple[str, str]], *, title: str | None = None) -> str:

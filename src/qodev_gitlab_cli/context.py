@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from gitlab_client import GitLabClient
+from qodev_gitlab_api import GitLabClient
 
 
 @dataclass
@@ -29,11 +29,11 @@ class Context:
     def resolve_project(self) -> str:
         if self.project:
             return self.project
-        from gitlab_cli.project import detect_project_from_git
+        from qodev_gitlab_cli.project import detect_project_from_git
 
         path = detect_project_from_git(self.base_url)
         if not path:
-            from gitlab_client.exceptions import ConfigurationError
+            from qodev_gitlab_api.exceptions import ConfigurationError
 
             raise ConfigurationError(
                 "Could not detect project. Use --project/-p or run from a git repo with a GitLab remote."

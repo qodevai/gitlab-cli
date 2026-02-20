@@ -6,15 +6,15 @@ from typing import Annotated
 
 from cyclopts import App, Parameter
 
-from gitlab_cli.context import ctx
-from gitlab_cli.formatters.mrs import (
+from qodev_gitlab_cli.context import ctx
+from qodev_gitlab_cli.formatters.mrs import (
     format_approval_detail,
     format_commit_list,
     format_discussion_list,
     format_mr_detail,
     format_mr_list,
 )
-from gitlab_cli.output import output, output_list, output_markdown
+from qodev_gitlab_cli.output import output, output_list, output_markdown
 
 mrs_app = App(name="mrs", help="Manage merge requests.")
 
@@ -57,11 +57,11 @@ def create(
     project = ctx.resolve_project()
 
     if source is None:
-        from gitlab_cli.project import get_current_branch
+        from qodev_gitlab_cli.project import get_current_branch
 
         source = get_current_branch()
         if not source:
-            from gitlab_cli.output import error
+            from qodev_gitlab_cli.output import error
 
             error("Could not detect current branch. Use --source.", ctx=ctx)
 
@@ -141,7 +141,7 @@ def changes(
     result = client.get_mr_changes(project, iid)
 
     if ctx.json_mode:
-        from gitlab_cli.output import output_json
+        from qodev_gitlab_cli.output import output_json
 
         output_json(result)
     else:
@@ -197,6 +197,6 @@ def pipelines(
     client = ctx.client()
     project = ctx.resolve_project()
     items = client.get_mr_pipelines(project, iid)
-    from gitlab_cli.formatters.pipelines import format_pipeline_list
+    from qodev_gitlab_cli.formatters.pipelines import format_pipeline_list
 
     output_list(items=items, ctx=ctx, format_fn=format_pipeline_list)

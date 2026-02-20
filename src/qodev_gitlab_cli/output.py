@@ -10,7 +10,7 @@ from typing import Any
 from rich.console import Console
 from rich.markdown import Markdown
 
-from gitlab_cli.context import Context
+from qodev_gitlab_cli.context import Context
 
 console = Console(stderr=True)
 stdout_console = Console()

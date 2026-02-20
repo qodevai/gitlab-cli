@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from gitlab_cli.formatters.generic import _fmt, _get, detail_table, list_table
+from qodev_gitlab_cli.formatters.generic import _fmt, _get, detail_table, list_table
 
 
 class TestGet:

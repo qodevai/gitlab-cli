@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from gitlab_cli.output import generic_markdown, md_table, serialize
+from qodev_gitlab_cli.output import generic_markdown, md_table, serialize
 
 
 class TestSerialize:

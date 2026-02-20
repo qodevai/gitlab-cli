@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from gitlab_cli.formatters.generic import detail_table, list_table
+from qodev_gitlab_cli.formatters.generic import detail_table, list_table
 
 ISSUE_DETAIL_FIELDS = [
     ("IID", "iid"),
