@@ -1,6 +1,15 @@
+[![CI](https://github.com/qodevai/gitlab-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/qodevai/gitlab-cli/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/qodev-gitlab-cli)](https://pypi.org/project/qodev-gitlab-cli/)
+
 # qodev-gitlab-cli
 
 Agent-friendly CLI for the GitLab API. Designed for both human and AI-agent workflows, with structured JSON output, consistent flags, and predictable error codes.
+
+## Why this CLI?
+
+- **Agent-friendly** — `--json` on every command, consistent flags, predictable exit codes
+- **Built for AI agent workflows** — works seamlessly with Claude Code, scripts, and automation pipelines
+- **How it compares**: [`glab`](https://gitlab.com/gitlab-org/cli) is GitLab's official interactive CLI for humans; `qodev-gitlab` is optimized for programmatic and agent use
 
 ## Installation
 
@@ -19,18 +28,26 @@ uvx qodev-gitlab-cli
 ```bash
 # Set your GitLab token
 export GITLAB_TOKEN="glpat-xxxxxxxxxxxxxxxxxxxx"
+```
 
-# List open merge requests for a project
-qodev-gitlab mrs list --project mygroup/myproject
+```bash
+# List open merge requests
+$ qodev-gitlab mrs list
+!42  Add authentication  opened  feature/auth → main
+
+# Get MR details as JSON (for scripts/agents)
+$ qodev-gitlab mrs get 42 --json
+{"iid": 42, "title": "Add authentication", "state": "opened", ...}
+
+# List pipelines
+$ qodev-gitlab pipelines list
+12345  running  main  2m ago
 
 # Get details of a specific issue
-qodev-gitlab issues get 42 --project mygroup/myproject
-
-# List pipelines, output as JSON for scripting
-qodev-gitlab pipelines list --project mygroup/myproject --json
+$ qodev-gitlab issues get 42
 
 # Create a merge request from the current branch
-qodev-gitlab mrs create --title "Add new feature" --project mygroup/myproject
+$ qodev-gitlab mrs create --title "Add new feature"
 ```
 
 ## Commands
