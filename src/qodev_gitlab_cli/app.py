@@ -13,6 +13,7 @@ import qodev_gitlab_cli.context as _ctx
 app = App(
     name="qodev-gitlab",
     help="Agent-friendly CLI for the GitLab API.",
+    help_format="rich",
     version_flags=[],
 )
 
@@ -29,13 +30,15 @@ from qodev_gitlab_cli.commands.projects import projects_app  # noqa: E402
 from qodev_gitlab_cli.commands.releases import releases_app  # noqa: E402
 from qodev_gitlab_cli.commands.variables import variables_app  # noqa: E402
 
-app.command(projects_app)
-app.command(mrs_app)
-app.command(pipelines_app)
-app.command(jobs_app)
-app.command(issues_app)
-app.command(releases_app)
-app.command(variables_app)
+_sub_apps = [projects_app, mrs_app, pipelines_app, jobs_app, issues_app, releases_app, variables_app]
+
+for _sub in _sub_apps:
+    app.command(_sub)
+    _sub.help_epilogue = ""  # prevent epilogue from propagating to sub-command help
+
+from qodev_gitlab_cli.help_reference import build_command_reference  # noqa: E402
+
+app.help_epilogue = build_command_reference(_sub_apps)
 
 # ---------------------------------------------------------------------------
 # Exit codes
