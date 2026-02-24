@@ -22,6 +22,7 @@ app.meta.group_parameters = Group("Global Options", sort_key=0)
 # ---------------------------------------------------------------------------
 # Import and register command groups
 # ---------------------------------------------------------------------------
+from qodev_gitlab_cli.commands.install import install_app  # noqa: E402
 from qodev_gitlab_cli.commands.issues import issues_app  # noqa: E402
 from qodev_gitlab_cli.commands.jobs import jobs_app  # noqa: E402
 from qodev_gitlab_cli.commands.mrs import mrs_app  # noqa: E402
@@ -35,6 +36,8 @@ _sub_apps = [projects_app, mrs_app, pipelines_app, jobs_app, issues_app, release
 for _sub in _sub_apps:
     app.command(_sub)
     _sub.help_epilogue = ""  # prevent epilogue from propagating to sub-command help
+
+app.command(install_app)
 
 from qodev_gitlab_cli.help_reference import build_command_reference  # noqa: E402
 
