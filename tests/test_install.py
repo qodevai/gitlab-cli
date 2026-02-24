@@ -5,7 +5,9 @@ from __future__ import annotations
 from pathlib import Path
 from unittest.mock import patch
 
-from qodev_gitlab_cli.commands.install import _install_skills
+import pytest
+
+from qodev_gitlab_cli.commands.install import _install_skills, install
 
 
 class TestInstallSkills:
@@ -44,11 +46,15 @@ class TestInstallSkills:
         assert not stale.exists()
         assert (dest / "SKILL.md").is_file()
 
-    def test_no_flag_shows_guidance(self) -> None:
-        from qodev_gitlab_cli.commands.install import install
-
-        with patch("qodev_gitlab_cli.commands.install.console") as mock_console:
+    def test_no_flag_exits_with_validation_error(self) -> None:
+        with pytest.raises(SystemExit, match="83"):
             install(skills=False)
 
+    def test_skills_flag_prints_success(self, tmp_path: Path) -> None:
+        with patch("qodev_gitlab_cli.commands.install.console") as mock_console, \
+             patch("qodev_gitlab_cli.commands.install.Path") as mock_path:
+            mock_path.cwd.return_value = tmp_path
+            install(skills=True)
+
         calls = [str(c) for c in mock_console.print.call_args_list]
-        assert any("--skills" in c for c in calls)
+        assert any("Installed skills" in c for c in calls)

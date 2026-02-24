@@ -7,6 +7,9 @@ Agent-friendly CLI for the GitLab API. Designed for AI coding agents with struct
 ```bash
 pip install qodev-gitlab-cli
 export GITLAB_TOKEN="glpat-..."
+
+# Install skill files into the current workspace
+qodev-gitlab install --skills
 ```
 
 The CLI auto-detects the current GitLab project from the git remote. Override with `--project GROUP/NAME` or `-p GROUP/NAME`.

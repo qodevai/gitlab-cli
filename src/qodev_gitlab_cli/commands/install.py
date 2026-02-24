@@ -23,6 +23,7 @@ def _install_skills(target_root: Path | None = None) -> Path:
     source = files("qodev_gitlab_cli") / "skills"
 
     if dest.exists():
+        console.print(f"Replacing existing skills at {dest}")
         shutil.rmtree(dest)
     dest.mkdir(parents=True)
 
@@ -49,10 +50,10 @@ def install(
     skills: Annotated[bool, Parameter(name="--skills", help="Install AI agent skill files", negative="")] = False,
 ) -> None:
     """Install CLI resources into the current workspace."""
-    if skills:
-        dest = _install_skills()
-        console.print(f"[green]Installed skills to {dest}[/green]")
-    else:
-        console.print("Usage: qodev-gitlab install --skills")
-        console.print("")
-        console.print("  --skills  Copy AI agent skill files to .claude/skills/qodev-gitlab/")
+    if not skills:
+        from qodev_gitlab_cli.output import error
+
+        error("No install target specified. Use: qodev-gitlab install --skills", code="validation", exit_code=83)
+
+    dest = _install_skills()
+    console.print(f"[green]Installed skills to {dest}[/green]")
