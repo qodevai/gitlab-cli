@@ -27,7 +27,7 @@ dependencies = [
 dev = ["pytest>=9.0", "pytest-mock>=3.15", "ruff>=0.15", "mypy>=1.13.0"]
 
 [project.scripts]
-qodev-gitlab = "qodev_gitlab_cli.app:main"
+qodev-gitlab-cli = "qodev_gitlab_cli.app:main"
 
 [project.urls]
 Homepage = "https://github.com/qodevai/gitlab-cli"
