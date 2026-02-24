@@ -51,8 +51,10 @@ class TestInstallSkills:
             install(skills=False)
 
     def test_skills_flag_prints_success(self, tmp_path: Path) -> None:
-        with patch("qodev_gitlab_cli.commands.install.console") as mock_console, \
-             patch("qodev_gitlab_cli.commands.install.Path") as mock_path:
+        with (
+            patch("qodev_gitlab_cli.commands.install.console") as mock_console,
+            patch("qodev_gitlab_cli.commands.install.Path") as mock_path,
+        ):
             mock_path.cwd.return_value = tmp_path
             install(skills=True)
 
