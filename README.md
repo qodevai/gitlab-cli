@@ -31,23 +31,26 @@ export GITLAB_TOKEN="glpat-xxxxxxxxxxxxxxxxxxxx"
 ```
 
 ```bash
+# Install AI agent skill files (for Claude Code, etc.)
+$ qodev-gitlab-cli install --skills
+
 # List open merge requests
-$ qodev-gitlab mrs list
+$ qodev-gitlab-cli mrs list
 !42  Add authentication  opened  feature/auth → main
 
 # Get MR details as JSON (for scripts/agents)
-$ qodev-gitlab mrs get 42 --json
+$ qodev-gitlab-cli mrs get 42 --json
 {"iid": 42, "title": "Add authentication", "state": "opened", ...}
 
 # List pipelines
-$ qodev-gitlab pipelines list
+$ qodev-gitlab-cli pipelines list
 12345  running  main  2m ago
 
 # Get details of a specific issue
-$ qodev-gitlab issues get 42
+$ qodev-gitlab-cli issues get 42
 
 # Create a merge request from the current branch
-$ qodev-gitlab mrs create --title "Add new feature"
+$ qodev-gitlab-cli mrs create --title "Add new feature"
 ```
 
 ## Commands
@@ -88,6 +91,7 @@ $ qodev-gitlab mrs create --title "Add new feature"
 | **variables** | `list` | List CI/CD variables (values hidden) |
 | | `get` | Get a CI/CD variable |
 | | `set` | Set (create or update) a CI/CD variable (`--protected`, `--masked`) |
+| **install** | `--skills` | Install AI agent skill files to `.claude/skills/qodev-gitlab/` |
 
 ## Configuration
 
